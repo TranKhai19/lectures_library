@@ -3,13 +3,29 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-const lectures = [
-    { name: 'Bài Giảng 1', description: 'Mô tả ngắn về bài giảng 1', path: '/uploads/sample1.pdf' },
-    { name: 'Bài Giảng 2', description: 'Mô tả ngắn về bài giảng 2', path: '/uploads/sample2.pdf' }
-];
+const uploadDir = path.join(__dirname, '../../uploads/');
 
-router.get('/', (req, res) => {
-    res.json(lectures.slice(0, 10));
+router.get('/files', (req, res) => {
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) {
+            return res.status(500).send('Unable to scan directory: ' + err);
+        }
+        const fileInfos = files.map(file => {
+            const filePath = path.join(uploadDir, file);
+            const metaPath = `${filePath}.meta`;
+            let category = 'Không xác định';
+            if (fs.existsSync(metaPath)) {
+                const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+                category = meta.category || 'Không xác định';
+            }
+            return {
+                name: file,
+                path: `/uploads/${file}`,
+                category: category
+            };
+        });
+        res.json(fileInfos);
+    });
 });
 
 router.post('/upload', (req, res) => {
@@ -17,23 +33,23 @@ router.post('/upload', (req, res) => {
         return res.status(400).send('No files were uploaded.');
     }
 
-    const lectureFile = req.files.lecture;
-    const uploadPath = path.join(__dirname, '../uploads', lectureFile.name);
+    const lectureFile = req.files.lectureFile;
+    const category = req.body.lectureCategory;
+    const uploadPath = path.join(uploadDir, lectureFile.name);
 
+    // Ensure the directory exists
+    fs.mkdirSync(uploadDir, { recursive: true });
+
+    // Move the file to the upload directory
     lectureFile.mv(uploadPath, (err) => {
         if (err) {
             return res.status(500).send(err);
         }
 
-        const { name, description } = req.body;
+        // Lưu thông tin lĩnh vực vào metadata của tệp
+        fs.writeFileSync(`${uploadPath}.meta`, JSON.stringify({ category: category }));
 
-        lectures.push({
-            name: name || lectureFile.name,
-            description: description || 'Không có mô tả',
-            path: `/uploads/${lectureFile.name}`
-        });
-
-        res.send('File uploaded!');
+        res.send({ message: 'File uploaded!', fileName: lectureFile.name });
     });
 });
 
