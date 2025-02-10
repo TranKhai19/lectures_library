@@ -1,55 +1,52 @@
-const express = require('express');
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const UPLOAD_FOLDER = path.join(__dirname, "../uploads");
 
-const uploadDir = path.join(__dirname, '../../uploads/');
+// Đảm bảo thư mục uploads tồn tại
+if (!fs.existsSync(UPLOAD_FOLDER)) {
+    fs.mkdirSync(UPLOAD_FOLDER, { recursive: true });
+}
 
-router.get('/files', (req, res) => {
-    fs.readdir(uploadDir, (err, files) => {
-        if (err) {
-            return res.status(500).send('Unable to scan directory: ' + err);
+// Cấu hình multer để lưu file
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, UPLOAD_FOLDER);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+});
+const upload = multer({ storage });
+
+// API tải lên file
+router.post("/upload", upload.single("file"), (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "Không có file nào được tải lên!" });
         }
-        const fileInfos = files.map(file => {
-            const filePath = path.join(uploadDir, file);
-            const metaPath = `${filePath}.meta`;
-            let category = 'Không xác định';
-            if (fs.existsSync(metaPath)) {
-                const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-                category = meta.category || 'Không xác định';
-            }
-            return {
-                name: file,
-                path: `/uploads/${file}`,
-                category: category
-            };
-        });
-        res.json(fileInfos);
-    });
+        res.json({ message: "Tải lên thành công!", filename: req.file.filename });
+    } catch (error) {
+        console.error("Lỗi khi tải lên file:", error);
+        res.status(500).json({ error: "Lỗi server khi tải lên file", details: error.message });
+    }
 });
 
-router.post('/upload', (req, res) => {
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
-    }
 
-    const lectureFile = req.files.lectureFile;
-    const category = req.body.lectureCategory;
-    const uploadPath = path.join(uploadDir, lectureFile.name);
+// API lấy danh sách bài giảng
+router.get("/", (req, res) => {
+    fs.readdir(UPLOAD_FOLDER, (err, files) => {
+        if (err) return res.status(500).json({ error: "Lỗi khi đọc thư mục" });
 
-    // Ensure the directory exists
-    fs.mkdirSync(uploadDir, { recursive: true });
+        const fileList = files.map(file => ({
+            name: file,
+            url: `/uploads/${file}`
+        }));
 
-    // Move the file to the upload directory
-    lectureFile.mv(uploadPath, (err) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-
-        // Lưu thông tin lĩnh vực vào metadata của tệp
-        fs.writeFileSync(`${uploadPath}.meta`, JSON.stringify({ category: category }));
-
-        res.send({ message: 'File uploaded!', fileName: lectureFile.name });
+        res.json({ lectures: fileList });
     });
 });
 

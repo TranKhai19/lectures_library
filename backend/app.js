@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
 const lecturesRouter = require('./routes/lectures');
 const app = express();
 const port = 4000;
@@ -15,35 +17,45 @@ app.use(fileUpload({
 }));
 
 // Để phục vụ các tệp đã tải lên
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/lectures', lecturesRouter);
 
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname, '../')));
 
-app.post('/chatbot', (req, res) => {
-    const userMessage = req.body.message.toLowerCase();
-    let reply = 'Xin lỗi, tôi không hiểu yêu cầu của bạn.';
+// Cấu hình lưu file vào thư mục "uploads"
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
-    if (userMessage.includes('sách') || userMessage.includes('bài giảng')) {
-        fs.readdir(uploadDir, (err, files) => {
-            if (err) {
-                return res.status(500).send('Unable to scan directory: ' + err);
-            }
-            reply = 'Đây là một số tài liệu mà bạn có thể quan tâm:\n';
-            files.forEach(file => {
-                reply += `- ${file}\n`;
-            });
-            res.json({ response: reply });
-        });
-    } else {
-        res.json({ response: reply });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir); // Lưu file vào thư mục "uploads"
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Đặt tên file tránh trùng lặp
     }
+});
+
+const upload = multer({ storage: storage });
+
+// API lấy danh sách bài giảng từ thư mục "uploads"
+app.get("/lectures/list", (req, res) => {
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) {
+            return res.status(500).json({ message: "Lỗi đọc thư mục", error: err });
+        }
+        const fileList = files.map(file => ({
+            name: file,
+            url: `http://localhost:${port}/uploads/${file}` // Tạo link để tải file
+        }));
+        res.json({ lectures: fileList });
+    });
 });
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
