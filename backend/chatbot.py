@@ -6,7 +6,7 @@ import requests
 app = FastAPI()
 
 # Thay bằng Hugging Face API Key của bạn
-HUGGINGFACE_API_KEY = "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"
+HUGGINGFACE_API_KEY = "HUGGINGFACE_API_KEY"
 
 # Model Endpoint (Meta-Llama 3 8B Instruct)
 HF_API_URL = "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct"

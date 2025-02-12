@@ -569,5 +569,40 @@ body {
 .upload-container {
     display: none; /* Ẩn form mặc định */
 }
-    
+
+.btn {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+#game-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#game-form input,
+#game-form textarea {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 

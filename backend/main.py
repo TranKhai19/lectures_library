@@ -41,7 +41,6 @@
 # # API hỏi GPT-4
 # @app.get("/ask/")
 # def ask_gpt(question: str):
-#     openai.api_key = "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"
 #     response = openai.ChatCompletion.create(
 #         model="gpt-4",
 #         messages=[{"role": "user", "content": question}]
@@ -59,7 +58,7 @@ import openai
 
 app = FastAPI()
 
-openai.api_key = "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"
+openai.api_key = "OPENAI_API_KEY"
 
 class ChatRequest(BaseModel):
     message: str

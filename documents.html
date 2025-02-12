@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Văn bản Đoàn Hội</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        .load-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.load-button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Thanh Điều Hướng -->
+    <nav class="navigation-bar">
+        <div class="nav-container">
+            <a href="#" class="logo">Thư viện Hội Đoàn GenZ</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="books.html">Sách</a></li>
+                <li><a href="lectures.html">Bài Giảng</a></li>
+                <li><a href="games.html">Trò chơi</a></li>
+                <li><a href="documents.html">Văn bản</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Nội dung chính -->
+    <div class="main-content">
+        <h1>Danh Sách Văn Bản Đoàn Hội</h1>
+        <button id="loadDocuments" class="load-button">Tải Dữ Liệu</button>
+        
+        <table id="documentTable">
+            <thead>
+                <tr>
+                    <th>Số/Ký hiệu</th>
+                    <th>Ngày Ban Hành</th>
+                    <th>Trích Yếu</th>
+                    <th>Tệp Đính Kèm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu sẽ được hiển thị ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Kết nối script -->
+    <script src="js/documents.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const lecturesRouter = require('./routes/lectures');
+const gamesRouter = require('./routes/games');
 const app = express();
 const port = 4000;
 
@@ -20,6 +21,7 @@ app.use(fileUpload({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/lectures', lecturesRouter);
+app.use('/games', gamesRouter);
 
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname, '../')));
@@ -52,6 +54,15 @@ app.get("/lectures/list", (req, res) => {
             url: `http://localhost:${port}/uploads/${file}` // Tạo link để tải file
         }));
         res.json({ lectures: fileList });
+    });
+});
+
+app.get("../../data/", (req, res) => {
+    fs.readFile("data/documents.json", "utf8", (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: "Lỗi đọc file dữ liệu" });
+        }
+        res.json(JSON.parse(data));
     });
 });
 
