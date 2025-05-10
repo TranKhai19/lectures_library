@@ -187,3 +187,422 @@ body {
 .hidden {
     display: none;
 }
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+}
+
+.page-intro {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-intro h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.page-intro p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* 🌟 Tổng thể */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* 🌟 Thanh Điều Hướng */
+.navigation-bar {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #ff7b00;
+}
+
+/* 🌟 Trang giới thiệu */
+.page-intro {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-intro h1 {
+    font-size: 2.2em;
+    color: #333;
+}
+
+.page-intro p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* 🌟 Danh sách bài giảng */
+.lectures-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lectures-list {
+    list-style: none;
+    padding: 0;
+}
+
+.lectures-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s;
+}
+
+.lectures-list li:hover {
+    background: #ffebcc;
+}
+
+.lectures-list a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* 🌟 Nút bấm */
+.btn-add, .btn-upload {
+    display: block;
+    margin: 20px auto;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn-add:hover, .btn-upload:hover {
+    background-color: #218838;
+}
+
+/* 🌟 Form Upload */
+.upload-lecture {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-lecture label {
+    font-weight: bold;
+}
+
+.upload-lecture input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 🌟 Thông báo */
+.alert-message {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+.chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.chatbot-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.chat-area {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.user-message {
+    text-align: right;
+    color: blue;
+    margin-bottom: 5px;
+}
+
+.bot-message {
+    text-align: left;
+    color: green;
+    margin-bottom: 5px;
+}
+
+#user-input {
+    width: 75%;
+    padding: 5px;
+}
+
+#send-button {
+    width: 20%;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-cover {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 10px;
+}
+
+.book-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.book-category, .book-price, .book-description {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 18px;
+    margin: 0 10px;
+}
+
+.upload-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.upload-container input, .upload-container select, .upload-container button {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.lectures-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.lecture-card {
+    width: 300px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.lecture-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.lecture-category {
+    font-size: 14px;
+    color: gray;
+}
+
+.lecture-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.lecture-link:hover {
+    background-color: #0056b3;
+}
+
+#toggleUploadForm {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#toggleUploadForm:hover {
+    background-color: #218838;
+}
+
+.upload-container {
+    display: none; /* Ẩn form mặc định */
+}
+
+.btn {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+#game-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#game-form input,
+#game-form textarea {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+

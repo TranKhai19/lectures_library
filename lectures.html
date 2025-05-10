@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư Viện - Bài Giảng</title>
+    <title>Danh Sách Bài Giảng</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
@@ -16,6 +16,8 @@
                 <li><a href="index.html">Trang Chủ</a></li>
                 <li><a href="books.html">Sách</a></li>
                 <li><a href="lectures.html">Bài Giảng</a></li>
+                <li><a href="games.html">Trò chơi</a></li>
+                <li><a href="documents.html">Văn bản</a></li>
                 <li><a href="#">Liên Hệ</a></li>
             </ul>
         </div>
@@ -23,24 +25,33 @@
 
     <!-- Nội Dung Chính -->
     <div class="main-content">
-        <section class="hero">
-            <h1>Danh Sách Bài Giảng</h1>
-            <p>Khám phá các bài giảng có sẵn trong thư viện của chúng tôi.</p>
-        </section>
-        <section class="lecture-list" id="lecture-list">
-            <!-- Bài giảng sẽ được hiển thị ở đây -->
-        </section>
-        <section class="upload-section">
-            <h2>Upload Bài Giảng</h2>
-            <form id="upload-form">
-                <input type="text" id="lecture-name" placeholder="Tên bài giảng">
-                <textarea id="lecture-description" placeholder="Mô tả ngắn"></textarea>
-                <input type="file" id="lecture-file" accept=".docx, .pptx, .pdf">
-                <button type="submit">Upload</button>
-            </form>
-        </section>
+        <button id="toggleUploadForm">Thêm tài liệu</button>
+
+        <!-- Form Upload (Ẩn mặc định) -->
+        <div class="upload-container" id="uploadForm" style="display: none;">
+            <input type="file" id="fileInput" accept=".pdf,.doc,.ppt">
+            <select id="categorySelect">
+                <option value="Công nghệ">Công nghệ</option>
+                <option value="Khoa học">Khoa học</option>
+                <option value="Toán học">Toán học</option>
+                <option value="Lịch sử">Lịch sử</option>
+                <option value="Ngôn ngữ">Ngôn ngữ</option>
+            </select>
+            <button id="uploadBtn">Tải lên</button>
+        </div>
+
+        <!-- Danh sách bài giảng -->
+        <h1>Danh sách bài giảng</h1>
+        <ul id="lecturesList"></ul>
+
+        <!-- Điều hướng phân trang -->
+        <div class="pagination">
+            <button id="prevPage" disabled>❮ Trang trước</button>
+            <span id="pageIndicator">Trang 1</span>
+            <button id="nextPage">Trang sau ❯</button>
+        </div>
     </div>
 
-    <script src="js/scripts.js"></script>
+    <script src="js/lectures.js"></script>
 </body>
 </html>

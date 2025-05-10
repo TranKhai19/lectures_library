@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Trò chơi 1",
+        "playerCount": 4,
+        "rules": "Luật chơi của trò chơi 1."
+    },
+    {
+        "name": "Trò chơi 2",
+        "playerCount": 6,
+        "rules": "Luật chơi của trò chơi 2."
+    }
+]
